@@ -15,8 +15,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
-  <!-- summernote -->
-  <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-lite.min.css') }}">
+
+
+  <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
   <style>
     .welcome-text {
       margin: 2rem auto; /* Menjaga margin tetap sama */
@@ -93,40 +94,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <h5 class="m-2 text-center welcome-text">Welcome To Suppport Helpdesk</h5>
                 </div>
                 <div class="card-body my-4">
-                <form method="POST" action="{{ route('ticket.creates') }}">
-                    @csrf
-                    <div class="col-sm-12">
-
-                        <input type="hidden" id="user_id" name="user_id" value="{{ auth()->id() }}">
-                        <!-- select -->
-                        <div class="form-group">
-                            <label>Select</label>
-                            <select class="form-control" name="option">
-                                @foreach ($options as $option)
-                                    <option value="{{ $option->name }}" id="{{ $option->name }}">{{ $option->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label>topic</label>
-                            <input type="text" class="form-control" id="topic" name="topic" placeholder="tes">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Select</label>
-                            <textarea id="summernote" name="summernote"></textarea>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary float-right" style="margin-right: 5px;">
-                        <i class="fas fa-download"></i> Seed
-                    </button>
-                </form>
-                </div>
-              </div>
-
-
-
+                    <table id="example2" class="table table-bordered table-hover">
+                      <thead>
+                      <tr>
+                        <th>Rendering engine</th>
+                        <th>Browser</th>
+                        <th>Platform(s)</th>
+                        <th>Engine version</th>
+                        <th>CSS grade</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        @foreach ($posts as $post)
+                          <tr>
+                            <td>{{ $post->option }}</td>
+                            <td>{{ $post->topic }}</td>
+                            <td>{{ $post->post_code }}</td>
+                            <td>{{ $post->created_at->format('d/m/Y') }}</td>
+                            <td><a href="{{ route('posts.show', ['post' => $post->post_code]) }}">Show</a></td>
+                          </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
+                  </div>
+            </div>
           </div>
           <!-- /.col-md-6 -->
         </div>
@@ -153,33 +144,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- jQuery -->
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-<!-- Summernote -->
-<script src="{{ asset('plugins/summernote/summernote-lite.min.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 <!-- dropzonejs -->
 <script src="{{ asset('plugins/dropzone/min/dropzone.min.js') }}"></script>
+<!-- DataTables  & Plugins -->
+<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
+<script src="{{ asset('plugins/pdfmake/pdfmake.min.js') }}"></script>
+<script src="{{ asset('plugins/pdfmake/vfs_fonts.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <script>
     $(function () {
-      // Summernote
-      $('#summernote').summernote({
-        placeholder: 'Hello Bootstrap 4',
-        tabsize: 2,
-        height: 200,
-        toolbar: [
-      ['style', ['style']],
-      ['font', ['bold', 'italic', 'underline', 'clear']],
-      ['fontname', ['fontname']],
-      ['color', ['color']],
-      ['para', ['ul', 'ol', 'paragraph']],
-      ['height', ['height']],
-      ['insert', ['link']]
-    ]
+      $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
       });
-    })
-
+    });
   </script>
 </body>
 </html>

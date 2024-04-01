@@ -45,4 +45,12 @@ class Ticket extends Controller
 
         return redirect()->route('homes')->with('success', 'Ticket created successfully.');
     }
+
+
+    public function lists()
+    {
+        $userId = auth()->id();
+        $posts = Post::all();
+        return view('pages.myticket', compact('posts', 'userId'));
+    }
 }

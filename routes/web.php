@@ -38,6 +38,7 @@ Route::middleware(['auth', 'verified', 'role:Admin|Super-Admin'])->group(functio
 Route::middleware(['auth', 'verified', 'role:User|Super-Admin'])->group(function () {
     Route::get('ticket', [Ticket::class, 'create'])->name('create');
     Route::post('ticket/creates', [Ticket::class, 'creates'])->name('ticket.creates');
+    Route::get('myticket', [Ticket::class, 'lists'])->name('myticket');
 });
 
 Route::get('superadmin', function () {
