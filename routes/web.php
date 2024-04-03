@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Ticket;
+use App\Http\Controllers\User;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -31,11 +32,13 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified', 'role:Admin|Super-Admin'])->group(function () {
     Route::get('admin', [Admin::class, 'Dashboard'])->name('admin');
     Route::get('admin/profile', [Admin::class, 'profile'])->name('profile');
+    Route::get('admin/mail', [Admin::class, 'ticket'])->name('mail');
     Route::resource('admin/posts', 'AdminPostController');
     // ...
 });
 
-Route::middleware(['auth', 'verified', 'role:User|Super-Admin'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:User|Super-Admin|Admin'])->group(function () {
+    Route::get('user', [User::class, 'Dashboard'])->name('user');
     Route::get('ticket', [Ticket::class, 'create'])->name('create');
     Route::post('ticket/creates', [Ticket::class, 'creates'])->name('ticket.creates');
     Route::get('myticket', [Ticket::class, 'lists'])->name('myticket');
