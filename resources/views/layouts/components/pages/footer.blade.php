@@ -23,25 +23,51 @@
 <script src="{{ asset('plugins/summernote/summernote-lite.min.js') }}"></script>
 <!-- dropzonejs -->
 <script src="{{ asset('plugins/dropzone/min/dropzone.min.js') }}"></script>
+<!-- dropzonejs -->
+<script src="{{ asset('plugins/dropzone/min/dropzone.min.js') }}"></script>
+<!-- DataTables  & Plugins -->
+<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
+<script src="{{ asset('plugins/pdfmake/pdfmake.min.js') }}"></script>
+<script src="{{ asset('plugins/pdfmake/vfs_fonts.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+
 <script>
     $(function () {
-      // Summernote
-      $('#summernote').summernote({
-        placeholder: 'Hello Bootstrap 4',
-        tabsize: 2,
-        height: 200,
-        toolbar: [
-      ['style', ['style']],
-      ['font', ['bold', 'italic', 'underline', 'clear']],
-      ['fontname', ['fontname']],
-      ['color', ['color']],
-      ['para', ['ul', 'ol', 'paragraph']],
-      ['height', ['height']],
-      ['insert', ['link']]
-    ]
-      });
-    })
+        // Summernote
+        $('#summernote').summernote({
+            placeholder: 'Hello Bootstrap 4',
+            tabsize: 2,
+            height: 200,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'italic', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['insert', ['link']]
+            ]
+        });
 
+        // Tabel
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
 </script>
 </body>
 </html>

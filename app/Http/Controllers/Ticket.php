@@ -6,6 +6,8 @@ use App\Models\Post;
 use App\Models\Ticket as ModelsTicket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+
 
 
 
@@ -52,6 +54,18 @@ class Ticket extends Controller
     {
         $userId = auth()->id();
         $posts = Post::all();
-        return view('pages.myticket', compact('posts', 'userId'));
+        $title = "Helpdesk";
+        return view('pages.myticket', compact('posts', 'userId', 'title'));
+    }
+
+
+    public function showPost($postId)
+    {
+        $userId = auth()->id();
+        $user = Auth::user();
+        $posts = Post::where('post_code', $postId)->first();
+        $title = "Helpdesk";
+
+        return view('pages.show', compact('posts', 'userId', 'title', 'user'));
     }
 }

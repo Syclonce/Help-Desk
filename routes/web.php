@@ -37,11 +37,12 @@ Route::middleware(['auth', 'verified', 'role:Admin|Super-Admin'])->group(functio
     // ...
 });
 
-Route::middleware(['auth', 'verified', 'role:User|Super-Admin|Admin'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:User|Super-Admin'])->group(function () {
     Route::get('user', [User::class, 'Dashboard'])->name('user');
     Route::get('ticket', [Ticket::class, 'create'])->name('create');
     Route::post('ticket/creates', [Ticket::class, 'creates'])->name('ticket.creates');
     Route::get('myticket', [Ticket::class, 'lists'])->name('myticket');
+    Route::get('user/posts/{postId}', [Ticket::class, 'showPost'])->name('user.posts');
 });
 
 Route::get('superadmin', function () {

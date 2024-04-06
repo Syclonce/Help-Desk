@@ -23,7 +23,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-lite.min.css') }}">
-
+  <!-- Tabel -->
+  <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+  <!-- Style -->
   <style>
     .welcome-text {
       margin: 2rem auto; /* Menjaga margin tetap sama */
@@ -42,6 +44,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
         text-shadow: 0 0 20px #007bff, 0 0 30px #007bff, 0 0 40px #007bff, 0 0 50px #007bff, 0 0 60px #007bff;
       }
     }
+
+    .center {
+            text-align: center;
+    }
+
   </style>
 
 </head>
