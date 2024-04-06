@@ -8,6 +8,7 @@ class User extends Controller
 {
     public function Dashboard()
     {
-        return view('pages.home');
+        $title = "Helpdesk";
+        return view('pages.home',  compact('title'));
     }
 }

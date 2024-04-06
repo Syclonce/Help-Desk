@@ -17,7 +17,8 @@ class Ticket extends Controller
     {
         $userId = auth()->id();
         $options = ModelsTicket::all();
-        return view('pages.ticket', compact('options', 'userId'));
+        $title = "Helpdesk";
+        return view('pages.ticket', compact('options', 'userId', 'title'));
     }
 
 
@@ -43,7 +44,7 @@ class Ticket extends Controller
 
         Post::create($validated);
 
-        return redirect()->route('homes')->with('success', 'Ticket created successfully.');
+        return redirect()->route('user')->with('success', 'Ticket created successfully.');
     }
 
 
