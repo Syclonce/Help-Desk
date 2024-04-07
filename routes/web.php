@@ -33,7 +33,8 @@ Route::middleware(['auth', 'verified', 'role:Admin|Super-Admin'])->group(functio
     Route::get('admin', [Admin::class, 'Dashboard'])->name('admin');
     Route::get('admin/profile', [Admin::class, 'profile'])->name('profile');
     Route::get('admin/mail', [Admin::class, 'ticket'])->name('mail');
-    Route::resource('admin/posts', 'AdminPostController');
+    Route::get('admin/posts/{postId}', [Admin::class, 'showPost'])->name('admin.posts');
+    Route::post('admin/replay', [Admin::class, 'store'])->name('admin.replay');
     // ...
 });
 
@@ -43,6 +44,7 @@ Route::middleware(['auth', 'verified', 'role:User|Super-Admin'])->group(function
     Route::post('ticket/creates', [Ticket::class, 'creates'])->name('ticket.creates');
     Route::get('myticket', [Ticket::class, 'lists'])->name('myticket');
     Route::get('user/posts/{postId}', [Ticket::class, 'showPost'])->name('user.posts');
+    Route::post('user/replay', [Ticket::class, 'store'])->name('user.replay');
 });
 
 Route::get('superadmin', function () {

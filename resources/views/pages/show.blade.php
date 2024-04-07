@@ -56,10 +56,37 @@
                           </div>
                         </div>
                         <!-- END timeline item -->
-                      </div>
 
+
+                        
+                        @foreach ($comments as $comment)
+                        <div>
+                            <i class="fas fa-envelope bg-blue"></i>
+                            <div class="timeline-item">
+                                <h3 class="timeline-header">{{ $user->name }}</h3>
+                                <div class="timeline-body">
+                                    {!! $comment->body !!} <!-- Menggunakan $comment, bukan $Comment -->
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
+
+                        <button type="button" id="replay-button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                            <i class="fas fa-download"></i> Replay
+                          </button>
+                    </div>
                 </div>
             </div>
+
+              <form action="{{ route('user.replay') }}" method="POST" id="response-form" style="display: none;">
+                @csrf
+                <input type="hidden" name="post_code" value="{{ $posts->post_code }}">
+                <div class="form-group">
+                    <textarea id="summernote" name="summernote"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
           </div>
           <!-- /.col-md-6 -->
         </div>

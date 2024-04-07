@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+  <!-- summernote -->
+  <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-lite.min.css') }}">
 </head>
 <body class="sidebar-mini layout-fixed layout-footer-fixed control-sidebar-slide-open layout-navbar-fixed">
 <div class="wrapper">
@@ -819,27 +821,65 @@
     <section class="content">
       <div class="container-fluid">
 
-        <div class="card-body p-0">
-            <table class="table table-striped">
-              <tbody>
-                @foreach ($data as $item)
-                <tr>
-                    <td>{{ $item->name }}</td>
-                    <td>{{ $item->topic }}</td>
-                    <td>{{ $item->option }}</td>
-                    <td>{{ $item->post_code }}</td>
-                    <td>
-                        <a href="{{ route('admin.posts',['postId' => $item->post_code]) }}" class="btn btn-primary">Lihat Detail</a>
-                    </td>
-                </tr>
+
+        <div class="center spacer">
+            <hr>
+            <div class="container" style="width: 80%;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div style="text-align: left;">Help Topic : {{ $posts->option }}</div>
+                    <div style="text-align: left;">Topic : {{ $posts->topic }}</div>
+                </div>
+                <hr>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 10px;">
+                    <div style="text-align: left;">Code Ticket : {{ $posts->post_code }}</div>
+                    <div style="text-align: left;">Create : {{ $posts->created_at }}</div>
+                </div>
+
+            </div>
+            <hr>
+        </div>
+
+        <div class="timeline">
+            <!-- timeline item -->
+            <div>
+              <i class="fas fa-envelope bg-blue"></i>
+              <div class="timeline-item">
+                <h3 class="timeline-header">{{ $userName}}</h3>
+
+                <div class="timeline-body">
+                    {!! $posts->content !!}
+                </div>
+              </div>
+            </div>
+            <!-- END timeline item -->
+            @foreach ($comments as $comment)
+                        <div>
+                            <i class="fas fa-envelope bg-blue"></i>
+                            <div class="timeline-item">
+                                <h3 class="timeline-header">{{ $userName }}</h3>
+                                <div class="timeline-body">
+                                    {!! $comment->body !!} <!-- Menggunakan $comment, bukan $Comment -->
+                                </div>
+                            </div>
+                        </div>
             @endforeach
-              </tbody>
-            </table>
+
           </div>
 
+          <button type="button" id="replay-button" class="btn btn-primary float-right" style="margin-right: 5px;">
+            <i class="fas fa-download"></i> Replay
+          </button>
 
 
 
+          <form action="{{ route('admin.replay') }}" method="POST" id="response-form" style="display: none;">
+            @csrf
+            <input type="hidden" name="post_code" value="{{ $posts->post_code }}">
+            <div class="form-group">
+                <textarea id="summernote" name="summernote"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
       </div><!--/. container-fluid -->
     </section>
     <!-- /.content -->
@@ -875,8 +915,40 @@
 <script src="{{ asset('plugins/jquery-mapael/maps/usa_states.min.js') }}"></script>
 <!-- ChartJS -->
 <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
-
+<!-- Summernote -->
+<script src="{{ asset('plugins/summernote/summernote-lite.min.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('dist/js/pages/dashboard2.js') }}"></script>
+
+
+<script>
+        $(function () {
+        // Summernote
+        $('#summernote').summernote({
+            placeholder: 'Hello Bootstrap 4',
+            tabsize: 2,
+            height: 200,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'italic', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['insert', ['link']]
+            ]
+        });
+    });
+
+    const replayButton = document.getElementById('replay-button');
+  const responseForm = document.getElementById('response-form');
+
+  replayButton.addEventListener('click', () => {
+    responseForm.style.display = 'block';
+    replayButton.style.display = 'none';
+  });
+
+
+</script>
 </body>
 </html>

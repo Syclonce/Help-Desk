@@ -23,8 +23,6 @@
 <script src="{{ asset('plugins/summernote/summernote-lite.min.js') }}"></script>
 <!-- dropzonejs -->
 <script src="{{ asset('plugins/dropzone/min/dropzone.min.js') }}"></script>
-<!-- dropzonejs -->
-<script src="{{ asset('plugins/dropzone/min/dropzone.min.js') }}"></script>
 <!-- DataTables  & Plugins -->
 <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
@@ -68,6 +66,14 @@
             "responsive": true,
         });
     });
+
+    const replayButton = document.getElementById('replay-button');
+  const responseForm = document.getElementById('response-form');
+
+  replayButton.addEventListener('click', () => {
+    responseForm.style.display = 'block';
+    replayButton.style.display = 'none';
+  });
 </script>
 </body>
 </html>
