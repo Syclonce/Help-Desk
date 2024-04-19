@@ -58,7 +58,7 @@
                         <!-- END timeline item -->
 
 
-                        
+
                         @foreach ($comments as $comment)
                         <div>
                             <i class="fas fa-envelope bg-blue"></i>

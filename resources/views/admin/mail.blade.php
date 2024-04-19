@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+
+  <link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
 </head>
 <body class="sidebar-mini layout-fixed layout-footer-fixed control-sidebar-slide-open layout-navbar-fixed">
 <div class="wrapper">
@@ -818,28 +820,79 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+              <h3 class="card-title">Inbox</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body p-0">
+              <div class="mailbox-controls">
+                <!-- Check all button -->
+                <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
+                </button>
 
-        <div class="card-body p-0">
-            <table class="table table-striped">
-              <tbody>
-                @foreach ($data as $item)
-                <tr>
-                    <td>{{ $item->name }}</td>
-                    <td>{{ $item->topic }}</td>
-                    <td>{{ $item->option }}</td>
-                    <td>{{ $item->post_code }}</td>
-                    <td>
-                        <a href="{{ route('admin.posts',['postId' => $item->post_code]) }}" class="btn btn-primary">Lihat Detail</a>
-                    </td>
-                </tr>
-            @endforeach
-              </tbody>
-            </table>
+                  <button type="button" class="btn btn-default btn-sm">
+                    <i class="fas fa-sync-alt"></i>
+                  </button>
+
+                <!-- /.btn-group -->
+                <div class="float-right">
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" placeholder="Search Mail">
+                        <div class="input-group-append">
+                          <div class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+                <!-- /.float-right -->
+              </div>
+              <div class="table-responsive mailbox-messages">
+
+                <!-- /.table -->
+              </div>
+              <!-- /.mail-box-messages -->
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer p-0">
+              <div class="mailbox-controls">
+                <table class="table table-hover table-striped">
+                    <tbody>
+                        @foreach ($data as $item)
+                        <tr>
+                            <td>
+                                <div class="icheck-primary">
+                                  <input type="checkbox" value="" id="check1">
+                                  <label for="check1"></label>
+                                </div>
+                              </td>
+                            <td class="mailbox-star"><a href="{{ route('admin.posts',['postId' => $item->post_code]) }}"><i class="fas fa-star text-warning"></i></a></td>
+                            <td class="mailbox-name"><a href="{{ route('admin.posts',['postId' => $item->post_code]) }}">{{ $item->name }}</a></td>
+                            <td class="mailbox-subject">{!! $item->content !!}</td>
+                            <td class="mailbox-attachment"><a href="{{ route('admin.posts',['postId' => $item->post_code]) }}">{{ $item->post_code}}</a></td>
+                            <td class="mailbox-attachment"></td>
+                            <td class="mailbox-date">{{ $item->created_at }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+                <div class="float-right">
+                  1-50/200
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm">
+                      <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button type="button" class="btn btn-default btn-sm">
+                      <i class="fas fa-chevron-right"></i>
+                    </button>
+                  </div>
+                  <!-- /.btn-group -->
+                </div>
+                <!-- /.float-right -->
+              </div>
+            </div>
           </div>
-
-
-
-
       </div><!--/. container-fluid -->
     </section>
     <!-- /.content -->
@@ -878,5 +931,7 @@
 
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('dist/js/pages/dashboard2.js') }}"></script>
+
+
 </body>
 </html>

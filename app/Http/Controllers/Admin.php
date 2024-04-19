@@ -33,6 +33,8 @@ class Admin extends Controller
                     'topic' => $post->topic,
                     'option' => $post->option,
                     'post_code' => $post->post_code,
+                    'created_at' => $post->created_at,
+                    'content' => $post->content,
                 ];
             }
         });
